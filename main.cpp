@@ -21,24 +21,23 @@ int main(int argc, char** argv) {
     int num_clusters = 5;
     int num_hfunc = 4;
     int num_htables = 5;
-    string input, conf, output, metric;
-    get_cfg(num_clusters,num_hfunc,num_htables);
-
+    string input="", conf1="", output1="", metric1="";
+    int i=0;
     /* Reading Arguments from command line */
-    while ((c = getopt(argc, argv, "i:c:o:d")) != -1) {
+    while ((c = getopt(argc, argv, "i:c:o:d:")) != -1) {
         switch (c) {
             case 'i':
                 input = optarg;
                 break;
             case 'c':
-                conf =  optarg;
+                conf1 =  optarg;
                 break;
             case 'o':
-                output = optarg;
+                output1 = optarg;
                 break;
             case 'd':
-                metric = optarg;
-                if ((metric != "cosine") && (metric != "euclidean")) {
+                metric1 = optarg;
+                if ((metric1 != "cosine") && (metric1 != "euclidean")) {
                     cerr << "Invalid function name" << endl;
                 }
                 break;
@@ -57,12 +56,15 @@ int main(int argc, char** argv) {
                 abort();
         }
     }
+    cout << num_clusters;
+    get_cfg(conf1,num_clusters,num_hfunc,num_htables);
+    cout << num_clusters;
     return 0;
 }
 
 void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) {
     ifstream file;
-    file.open (inputf);
+    file.open(inputf);
     if (!file.is_open()){
         cerr << "Failed to open cluster.conf file! " << endl;
         exit(0) ;
@@ -82,4 +84,5 @@ void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) {
         }
 
     }
+    file.close();
 }
