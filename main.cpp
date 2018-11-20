@@ -11,13 +11,13 @@
 #include <chrono>
 #include <random>
 #include <unistd.h>
-
-void get_cfg(std::string ,int &, int &, int &);
+#include "utilities.h"
+#include "data_point.h"
 
 using namespace std;
 
 int main(int argc, char** argv) {
-    int c;
+    int c,num_lines=0,dim=0;
     int num_clusters = 5;
     int num_hfunc = 4;
     int num_htables = 5;
@@ -56,33 +56,16 @@ int main(int argc, char** argv) {
                 abort();
         }
     }
-    cout << num_clusters;
+
     get_cfg(conf1,num_clusters,num_hfunc,num_htables);
-    cout << num_clusters;
+    get_data_lengths(input,num_lines,dim);
+    cout << "dimension: " << dim <<endl;
+    cout << "lines: " << num_lines << endl;
+
+    data_point<double> data_set[num_lines];
+    feed_data_set(input,data_set,dim);
+
     return 0;
 }
 
-void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) {
-    ifstream file;
-    file.open(inputf);
-    if (!file.is_open()){
-        cerr << "Failed to open cluster.conf file! " << endl;
-        exit(0) ;
-    }
-    string word;
-    while (file >> word)
-    {
-        if (word == "number_of_clusters:") {
-            file >> word;
-            clusters=stoi(word);
-        } else if (word == "number_of_hash_functions:") {
-            file >> word;
-            hfunc=stoi(word);
-        } else if (word == "number_of_hash_tables:") {
-            file >> word;
-            htables=stoi(word);
-        }
 
-    }
-    file.close();
-}
