@@ -67,10 +67,22 @@ void feed_data_set(string input, data_point<double> *pPoint,int d) {
     string line;
     ifstream inputfd;
     inputfd.open (input);
-    int i=0,j;
-    for( int ii=0; ii< d ;ii++){
-        getline(inputfd,line,',');
-        cout << line << endl;
+    inputfd.exceptions(std::ifstream::failbit|std::ifstream::badbit);
+    int i=0,j,z=0;
+    cout.precision(15);
+    while(z<5000){
+        for( int ii=0; ii< d ;ii++){
+            getline(inputfd,line,',');
+            if (ii!=0){
+                dd=stod(line);
+                pPoint[z].point.push_back(dd);
+            }
+        }
+        getline(inputfd,line);
+        dd=stod(line);
+        pPoint[z].point.push_back(dd);
+        pPoint[z].name="item_"+to_string(z);
+        z++;
     }
     inputfd.close();
 }
