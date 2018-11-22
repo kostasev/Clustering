@@ -3,4 +3,4 @@ project(project2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(project2 main.cpp utilities.cpp utilities.h data_point.h)
+add_executable(project2 main.cpp utilities.cpp utilities.h data_point.h cluster.cpp cluster.h)
