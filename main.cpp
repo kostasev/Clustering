@@ -17,10 +17,10 @@
 
 using namespace std;
 
-vector<int> create_centroids(){
-    vector<int> cc= {1,2,3,4,5};
+vector<cluster> create_centroids(data_feed){
+    
 
-    return cc;
+    return ;
 }
 
 int main(int argc, char** argv) {
@@ -64,18 +64,16 @@ int main(int argc, char** argv) {
         }
     }
 
-    //get_cfg(conf1,num_clusters,num_hfunc,num_htables);
-    //get_data_lengths(input,num_lines,dim);
+    get_cfg(conf1,num_clusters,num_hfunc,num_htables);
+    get_data_lengths(input,num_lines,dim);
     cout << "dimension: " << dim <<endl;
     cout << "lines: " << num_lines << endl;
 
     data_point<double> data_set[num_lines];
-    //feed_data_set(input,data_set,dim);
+    feed_data_set(input,data_set,dim);
 
-    //vector<cluster> clusters[num_clusters]=create_centroids(data_set,num_clusters);
+    vector<cluster> clusters=create_centroids(data_set,num_clusters);
     vector<int> clusters=create_centroids();
-    for (int ii=0;ii<5;ii++)
-        cout << clusters[ii] <<endl;
     return 0;
 }
 
