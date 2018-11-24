@@ -17,11 +17,51 @@
 
 using namespace std;
 
-vector<cluster> create_centroids(data_feed){
-    
-
-    return ;
+vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
+    vector<cluster> clusters1;
+    std::random_device rd; // assume unsigned int is 32 bits
+    std::mt19937_64 generator(rd()); // seeded with 256 bits of entropy from random_device
+    std::uniform_int_distribution<int>   uint_dist(0,length-1);
+    for(int i=0 ; i < k ;i++){
+        cluster temp1=cluster(dat[uint_dist(generator)]);
+        clusters1.push_back(temp1);
+    }
+    return clusters1;
 }
+
+double euclidean_dist(vector<double> p1,vector<double> p2) {
+    double sum = 0.0;
+    for (int i=0 ; i<p1.size();i++){
+        sum+=(p1[i]-p2[i])*(p1[i]-p2[i]);
+    }
+    sum = sqrt(sum);
+    return sum;
+}
+
+vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length){
+    double dist_max,dist;
+    data_point<double> temp_cent;
+    vector<cluster> clusters1;
+    std::random_device rd; // assume unsigned int is 32 bits
+    std::mt19937_64 generator(rd()); // seeded with 256 bits of entropy from random_device
+    std::uniform_int_distribution<int>   uint_dist(0,length-1);
+    cluster temp1=cluster(dat[uint_dist(generator)]);
+    clusters1.push_back(temp1);
+    temp_cent = temp1.get_centroid();
+    while (--k>0){
+        dist_max=0.0;
+        for(int i=0 ; i < length ;i++){
+            if ((dist=euclidean_dist(dat[i].point,temp_cent.point))>dist_max){
+                dist_max=dist;
+                temp_cent=dat[i];
+            }
+        }
+        clusters1.push_back(temp_cent);
+    }
+    return clusters1;
+}
+
+
 
 int main(int argc, char** argv) {
     int c,num_lines=0,dim=0;
@@ -72,8 +112,12 @@ int main(int argc, char** argv) {
     data_point<double> data_set[num_lines];
     feed_data_set(input,data_set,dim);
 
-    vector<cluster> clusters=create_centroids(data_set,num_clusters);
-    vector<int> clusters=create_centroids();
+    vector<cluster> clusters=create_kmeans_centroids(data_set,num_clusters,num_lines);
+
+    for(int z=0;z<clusters.size();z++){
+        cout << "This is the cluster center: " << z <<  endl;
+        clusters[z].print_centroid();
+    }
     return 0;
 }
 

@@ -5,13 +5,15 @@
 #include "cluster.h"
 
 
-cluster::cluster() {}
+cluster::cluster(data_point<double> d) {
+    set_centroid(d);
+}
 
-void cluster::set_centroid(vector<double> cen){
+void cluster::set_centroid(data_point<double> cen){
     this->centroid=cen;
 }
 
-vector<double> cluster::get_centroid(){
+data_point<double> cluster::get_centroid(){
     return this->centroid;
 }
 
@@ -25,4 +27,11 @@ vector<data_point<double>> cluster::get_items(){
 
 void cluster::empty_clitems() {
     this->clitems.clear();
+}
+void cluster::print_centroid() {
+    cout << "Item: " << centroid.name << endl;
+    for (int i = 0 ; i< centroid.point.size(); i++){
+        cout << centroid.point[i] << " " ;
+    }
+    cout <<endl;
 }
