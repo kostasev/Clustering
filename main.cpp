@@ -18,13 +18,24 @@
 using namespace std;
 
 vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
+    int flag=0;
     vector<cluster> clusters1;
     std::random_device rd; // assume unsigned int is 32 bits
     std::mt19937_64 generator(rd()); // seeded with 256 bits of entropy from random_device
     std::uniform_int_distribution<int>   uint_dist(0,length-1);
     for(int i=0 ; i < k ;i++){
         cluster temp1=cluster(dat[uint_dist(generator)]);
-        clusters1.push_back(temp1);
+        for (int j=0;j<clusters1.size();j++){
+            if(clusters1[j].get_centroid().name==temp1.get_centroid().name){
+                i--;
+                flag=1;
+                break;
+            }
+        }
+        if (flag==0)
+            clusters1.push_back(temp1);
+        else
+            flag=0;
     }
     return clusters1;
 }
@@ -51,9 +62,11 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
     while (--k>0){
         dist_max=0.0;
         for(int i=0 ; i < length ;i++){
-            if ((dist=euclidean_dist(dat[i].point,temp_cent.point))>dist_max){
-                dist_max=dist;
-                temp_cent=dat[i];
+            for(int j=0;j<clusters1.size();j++){
+                if ((dist=euclidean_dist(dat[i].point,clusters1[j].get_centroid().point))>dist_max){
+                    dist_max=dist;
+                    temp_cent=dat[i];
+                }
             }
         }
         clusters1.push_back(temp_cent);
@@ -112,7 +125,7 @@ int main(int argc, char** argv) {
     data_point<double> data_set[num_lines];
     feed_data_set(input,data_set,dim);
 
-    vector<cluster> clusters=create_kmeans_centroids(data_set,num_clusters,num_lines);
+    vector<cluster> clusters=create_random_centroids(data_set,num_clusters,num_lines);
 
     for(int z=0;z<clusters.size();z++){
         cout << "This is the cluster center: " << z <<  endl;
