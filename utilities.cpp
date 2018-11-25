@@ -13,6 +13,7 @@ int num_columns(string line) {
             words++;
         }
     }
+    words++;
     return words;
 }
 
@@ -71,17 +72,15 @@ void feed_data_set(string input, data_point<double> *pPoint,int d) {
     int i=0,j,z=0;
     cout.precision(15);
     while(z<5000){
-        for( int ii=0; ii< d ;ii++){
+        for( int ii=0; ii< d-1 ;ii++){
             getline(inputfd,line,',');
-            if (ii!=0){
-                dd=stod(line);
-                pPoint[z].point.push_back(dd);
-            }
+            dd=stod(line);
+            pPoint[z].point.push_back(dd);
         }
         getline(inputfd,line);
         dd=stod(line);
         pPoint[z].point.push_back(dd);
-        pPoint[z].name="item_"+to_string(z);
+        pPoint[z].name="item_"+to_string(z+1);
         z++;
     }
     inputfd.close();

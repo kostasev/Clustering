@@ -35,3 +35,12 @@ void cluster::print_centroid() {
     }
     cout <<endl;
 }
+
+void cluster::print_cluster() {
+    cout << "Centroid: " << this->centroid.name << endl;
+    cout << "Cluster Size: " << this->clitems.size() << endl;
+    for (int i = 0 ; i< this->clitems.size() ; i++){
+        cout << this->clitems[i].name << " " ;
+    }
+    cout <<endl;
+}

@@ -17,6 +17,31 @@
 
 using namespace std;
 
+double euclidean_dist(vector<double> p1,vector<double> p2) {
+    double sum = 0.0;
+    for (int i=0 ; i<p1.size();i++){
+        sum+=(p1[i]-p2[i])*(p1[i]-p2[i]);
+    }
+    sum = sqrt(sum);
+    return sum;
+}
+
+void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
+    double dist_min,dist;
+    int cluster;
+    for (int i=0;i<num_lines;i++){
+        dist_min=100000.0;
+        cluster=0;
+        for(int j=0;j<clusters.size();j++){
+            if ((dist=euclidean_dist(dat[i].point,clusters[j].get_centroid().point))<dist_min){
+                dist_min=dist;
+                cluster=j;
+            }
+        }
+        clusters[cluster].add_item(dat[i]);
+    }
+}
+
 vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
     int flag=0;
     vector<cluster> clusters1;
@@ -40,18 +65,11 @@ vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length
     return clusters1;
 }
 
-double euclidean_dist(vector<double> p1,vector<double> p2) {
-    double sum = 0.0;
-    for (int i=0 ; i<p1.size();i++){
-        sum+=(p1[i]-p2[i])*(p1[i]-p2[i]);
-    }
-    sum = sqrt(sum);
-    return sum;
-}
+
 
 vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length){
-    double dist_max,dist;
-    data_point<double> temp_cent;
+    double dist_max,dist,dist_min;
+    data_point<double> temp_cent,temp_cent2;
     vector<cluster> clusters1;
     std::random_device rd; // assume unsigned int is 32 bits
     std::mt19937_64 generator(rd()); // seeded with 256 bits of entropy from random_device
@@ -62,14 +80,19 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
     while (--k>0){
         dist_max=0.0;
         for(int i=0 ; i < length ;i++){
+            dist_min=100000.0;
             for(int j=0;j<clusters1.size();j++){
-                if ((dist=euclidean_dist(dat[i].point,clusters1[j].get_centroid().point))>dist_max){
-                    dist_max=dist;
+                if ((dist=euclidean_dist(dat[i].point,clusters1[j].get_centroid().point))<dist_min){
+                    dist_min=dist;
                     temp_cent=dat[i];
                 }
             }
+            if (dist_min>dist_max){
+                dist_max=dist_min;
+                temp_cent2=temp_cent;
+            }
         }
-        clusters1.push_back(temp_cent);
+        clusters1.push_back(temp_cent2);
     }
     return clusters1;
 }
@@ -81,6 +104,7 @@ int main(int argc, char** argv) {
     int num_clusters = 5;
     int num_hfunc = 4;
     int num_htables = 5;
+    int exit_rep = 10;
     string input="", conf1="", output1="", metric1="";
     int i=0;
     /* Reading Arguments from command line */
@@ -125,12 +149,20 @@ int main(int argc, char** argv) {
     data_point<double> data_set[num_lines];
     feed_data_set(input,data_set,dim);
 
-    vector<cluster> clusters=create_random_centroids(data_set,num_clusters,num_lines);
+    vector<cluster> clusters=create_kmeans_centroids(data_set,num_clusters,num_lines);
 
-    for(int z=0;z<clusters.size();z++){
-        cout << "This is the cluster center: " << z <<  endl;
-        clusters[z].print_centroid();
+    assign_to_clusters(data_set,clusters,num_lines);
+
+
+
+    for(int r=0;r<clusters.size();r++){
+        clusters[r].print_cluster();
     }
+
+    for(int r=0;r<exit_rep;r++){
+        //update_clusters();
+    }
+
     return 0;
 }
 
