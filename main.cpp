@@ -42,6 +42,18 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
+int update_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
+    vector<cluster> temp;
+    for (int i=0;i<clusters.size(); i++){
+        temp.push_back(clusters[i]);
+    }
+
+    for (int i=0;i<clusters.size();i++){
+
+    }
+
+}
+
 vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
     int flag=0;
     vector<cluster> clusters1;
@@ -153,14 +165,13 @@ int main(int argc, char** argv) {
 
     assign_to_clusters(data_set,clusters,num_lines);
 
-
-
     for(int r=0;r<clusters.size();r++){
         clusters[r].print_cluster();
     }
 
     for(int r=0;r<exit_rep;r++){
-        //update_clusters();
+        if(update_clusters(data_set,clusters,num_lines)==1)
+            break;
     }
 
     return 0;
