@@ -44,3 +44,12 @@ void cluster::print_cluster() {
     }
     cout <<endl;
 }
+
+int cluster::check_equal(cluster xx) {
+    for (int i=0; i< this->clitems.size();i++){
+        if (this->clitems[i]!=xx[i]){
+            return 1;
+        }
+    }
+    return 0;
+}

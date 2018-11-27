@@ -42,6 +42,23 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
+int clusters_equal(cluster x, cluster y){
+    if(x.get_items().size()!=y.get_items().size()) return 1;
+    x.check_equal(y);
+}
+
+vector<double> calculate_mean_centroid(cluster cl){
+    vector<double> new_cl;
+    vector<data_point<double>> cluster_dat=cl.get_items();
+    int size=(int)cluster_dat.size();
+    int len = cluster_dat[0].point.size();
+    cl.get_items();
+    for (int i=0;i<size;i++){
+
+    }
+}
+
+
 int update_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
     vector<cluster> temp;
     for (int i=0;i<clusters.size(); i++){
@@ -49,10 +66,26 @@ int update_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_li
     }
 
     for (int i=0;i<clusters.size();i++){
-
+        vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
+        data_point<double> temp1;
+        temp1.name="";
+        temp1.point=new_centrer;
+        clusters[i].set_centroid(temp1);
     }
 
+    for(int i=0;i<clusters.size();i++){
+        clusters[i].empty_clitems();
+    }
+    assign_to_clusters(dat,clusters,num_lines);
+
+    for(int i=0;i<clusters.size();i++){
+        if (clusters_equal(clusters[i],temp[i]) != 0 )
+            return 1;
+    }
+    return 0;
 }
+
+
 
 vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
     int flag=0;

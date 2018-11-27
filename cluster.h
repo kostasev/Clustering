@@ -20,6 +20,7 @@ public:
     void empty_clitems();
     void print_centroid();
     void print_cluster();
+    int check_equal(cluster);
 };
 
 
