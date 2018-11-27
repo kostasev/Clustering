@@ -48,14 +48,19 @@ int clusters_equal(cluster x, cluster y){
 }
 
 vector<double> calculate_mean_centroid(cluster cl){
-    vector<double> new_cl;
+    vector<double> new_cl(cl.get_centroid().point.size(),0);
     vector<data_point<double>> cluster_dat=cl.get_items();
     int size=(int)cluster_dat.size();
     int len = cluster_dat[0].point.size();
-    cl.get_items();
-    for (int i=0;i<size;i++){
 
+    for (int i=0;i<len;i++){
+        for (int j=0;j<size;j++){
+            new_cl[i]+=cluster_dat[i].point[j];
+        }
     }
+    for(int i=0;i<len;i++)
+        new_cl[i]/=size;
+    return new_cl;
 }
 
 
@@ -198,11 +203,11 @@ int main(int argc, char** argv) {
 
     assign_to_clusters(data_set,clusters,num_lines);
 
-    for(int r=0;r<clusters.size();r++){
+    /*for(int r=0;r<clusters.size();r++){
         clusters[r].print_cluster();
-    }
+    }*/
 
-    for(int r=0;r<exit_rep;r++){
+    for(int r=0;r<1;r++){
         if(update_clusters(data_set,clusters,num_lines)==1)
             break;
     }
