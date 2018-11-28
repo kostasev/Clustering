@@ -17,15 +17,6 @@
 
 using namespace std;
 
-double euclidean_dist(vector<double> p1,vector<double> p2) {
-    double sum = 0.0;
-    for (int i=0 ; i<p1.size();i++){
-        sum+=(p1[i]-p2[i])*(p1[i]-p2[i]);
-    }
-    sum = sqrt(sum);
-    return sum;
-}
-
 void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
     double dist_min,dist;
     int cluster;
@@ -42,55 +33,57 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
-int clusters_equal(cluster x, cluster y){
-    if(x.get_items().size()!=y.get_items().size()) return 1;
-    x.check_equal(y);
-}
+vector<double> calculate_mean_centroid(cluster cl) {
+    vector<data_point<double>> cluster_dat = cl.get_items();
+    int size = (int) cluster_dat.size();
+    int len = 0;
+    if(size > 0 )
+        len=cluster_dat[0].point.size();
+    vector<double> new_cl(204, 0.0);
 
-vector<double> calculate_mean_centroid(cluster cl){
-    vector<double> new_cl(cl.get_centroid().point.size(),0);
-    vector<data_point<double>> cluster_dat=cl.get_items();
-    int size=(int)cluster_dat.size();
-    int len = cluster_dat[0].point.size();
+    if(size > 0 && len == 204){
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < size; j++) {
+                new_cl[i] += cluster_dat[j].point[i];
+            }
+        }
 
-    for (int i=0;i<len;i++){
-        for (int j=0;j<size;j++){
-            new_cl[i]+=cluster_dat[i].point[j];
+        for (int i = 0; i < 204; i++){
+            new_cl[i]/=size;
         }
     }
-    for(int i=0;i<len;i++)
-        new_cl[i]/=size;
     return new_cl;
 }
 
 
 int update_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
-    vector<cluster> temp;
+    /*vector<cluster> temp;
     for (int i=0;i<clusters.size(); i++){
         temp.push_back(clusters[i]);
-    }
-
+    }*/
+    clusters[0].print_cluster();
     for (int i=0;i<clusters.size();i++){
         vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
         data_point<double> temp1;
-        temp1.name="";
+        temp1.name="Mean";
         temp1.point=new_centrer;
         clusters[i].set_centroid(temp1);
+        new_centrer.clear();
+        temp1.point.clear();
     }
-
-    for(int i=0;i<clusters.size();i++){
+    clusters[0].print_cluster();
+    /*for(int i=0;i<clusters.size();i++){
         clusters[i].empty_clitems();
     }
+    clusters[0].print_cluster();
     assign_to_clusters(dat,clusters,num_lines);
-
+    clusters[0].print_cluster();
     for(int i=0;i<clusters.size();i++){
-        if (clusters_equal(clusters[i],temp[i]) != 0 )
+        if (clusters[i].check_equal(temp[i]) == 1 )
             return 1;
-    }
+    }*/
     return 0;
 }
-
-
 
 vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length){
     int flag=0;
@@ -142,7 +135,7 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
                 temp_cent2=temp_cent;
             }
         }
-        clusters1.push_back(temp_cent2);
+        clusters1.emplace_back(temp_cent2);
     }
     return clusters1;
 }
@@ -203,13 +196,75 @@ int main(int argc, char** argv) {
 
     assign_to_clusters(data_set,clusters,num_lines);
 
-    /*for(int r=0;r<clusters.size();r++){
-        clusters[r].print_cluster();
-    }*/
+    vector<cluster> temp;
+    int same=0;
+    for(int r=0;r<100000;r++){
 
-    for(int r=0;r<1;r++){
-        if(update_clusters(data_set,clusters,num_lines)==1)
-            break;
+        for (int i=0;i<clusters.size(); i++){
+            temp.push_back(clusters[i]);
+        }
+
+
+        for (int i=0;i<clusters.size();i++){
+            vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
+            cout << "size new center: " << new_centrer.size() << "rep"<< i<< endl;
+            for (int z=0;z <204;z++)
+                cout << " " << new_centrer[z];
+            cout <<endl <<endl;
+            data_point<double> temp1;
+            temp1.name="Mean";
+            temp1.point=new_centrer;
+            clusters[i].set_centroid(temp1);
+            new_centrer.clear();
+            temp1.point.clear();
+        }
+
+        for(int r=0;r<clusters.size();r++){
+            clusters[r].empty_clitems();
+        }
+
+        assign_to_clusters(data_set,clusters,num_lines);
+
+        for(int i=0;i<clusters.size();i++){
+            if (clusters[i].check_equal(temp[i]) == 1 ){
+                same++;
+            }
+        }
+        if (same==clusters.size()){
+            cout << "Cluster did not change. Exit rep: "<< r << endl;
+            temp.clear();
+            return 1;
+        }
+        same=0;
+        /*
+        for (int i=0;i<clusters.size();i++){
+            vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
+            cout << "size new center: " << new_centrer.size() << endl;
+            for (int z=0;z <204;z++)
+                cout << " " << new_centrer[z];
+            cout << endl <<endl;
+            data_point<double> temp1;
+            temp1.name="Mean";
+            temp1.point=new_centrer;
+            clusters[i].set_centroid(temp1);
+            new_centrer.clear();
+            temp1.point.clear();
+        }
+        cout << "KENOURIO KENTRO" <<endl;
+        clusters[0].print_cluster();
+        for(int r=0;r<clusters.size();r++){
+            clusters[r].empty_clitems();
+        }
+        assign_to_clusters(data_set,clusters,num_lines);
+
+        for(int i=0;i<clusters.size();i++){
+            if (clusters[i].check_equal(temp[i]) == 1 )
+                cout << "Cluster did not change. Exit rep: "<< r << endl;
+                temp.clear();
+                return 1;
+        }*/
+        temp.clear();
+        cout << "rep: " << r <<endl;
     }
 
     return 0;

@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include "utilities.h"
+#include <cmath>
 
 int num_columns(string line) {
     int words=0;
@@ -43,6 +44,19 @@ void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) {
     file.close();
 }
 
+double euclidean_dist(vector<double> p1,vector<double> p2) {
+    double sum = 0.0;
+    for (int i=0 ; i<p1.size();i++){
+        sum+=(p1[i]-p2[i])*(p1[i]-p2[i]);
+    }
+    sum = sqrt(sum);
+    return sum;
+}
+
+int clusters_equal(cluster x, cluster y){
+    //if(x.get_items().size()!=y.get_items().size()) return 1;
+    return x.check_equal(y);
+}
 
 void get_data_lengths(string input,int& lines, int& d) {
     ifstream inputfd;

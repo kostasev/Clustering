@@ -46,11 +46,12 @@ void cluster::print_cluster() {
 }
 
 int cluster::check_equal(cluster xx) {
+    if(this->clitems.size()!=xx.clitems.size()) return 0;
     vector<data_point<double>> zz=xx.get_items();
     for (int i=0; i< this->clitems.size();i++){
         if (this->clitems[i].point!=zz[i].point){
-            return 1;
+            return 0;
         }
     }
-    return 0;
+    return 1;
 }
