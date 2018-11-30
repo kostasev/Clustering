@@ -33,6 +33,28 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
+void silhouette(vector<cluster> clusters){
+    double total=0.0;
+    for (int i=0; i < clusters.size() ; i ++){
+        total=silhouette_cluster(clusters[i]);
+    }
+
+    total/=clusters.size();
+}
+
+void gen_random(char *s, const int len) {
+    static const char alphanum[] =
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+
+    for (int i = 0; i < len; ++i) {
+        s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
+    }
+
+    s[len] = 0;
+}
+
 vector<double> calculate_mean_centroid(cluster cl) {
     vector<data_point<double>> cluster_dat = cl.get_items();
     int size = (int) cluster_dat.size();
@@ -198,12 +220,12 @@ int main(int argc, char** argv) {
 
     vector<cluster> temp;
     int same=0;
+    char rand_name[21];
     for(int r=0;r<100000;r++){
 
         for (int i=0;i<clusters.size(); i++){
             temp.push_back(clusters[i]);
         }
-
 
         for (int i=0;i<clusters.size();i++){
             vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
@@ -212,7 +234,9 @@ int main(int argc, char** argv) {
                 cout << " " << new_centrer[z];
             cout <<endl <<endl;
             data_point<double> temp1;
+            gen_random(rand_name,20);
             temp1.name="Mean";
+            temp1.name.append(rand_name);
             temp1.point=new_centrer;
             clusters[i].set_centroid(temp1);
             new_centrer.clear();
@@ -236,36 +260,10 @@ int main(int argc, char** argv) {
             return 1;
         }
         same=0;
-        /*
-        for (int i=0;i<clusters.size();i++){
-            vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
-            cout << "size new center: " << new_centrer.size() << endl;
-            for (int z=0;z <204;z++)
-                cout << " " << new_centrer[z];
-            cout << endl <<endl;
-            data_point<double> temp1;
-            temp1.name="Mean";
-            temp1.point=new_centrer;
-            clusters[i].set_centroid(temp1);
-            new_centrer.clear();
-            temp1.point.clear();
-        }
-        cout << "KENOURIO KENTRO" <<endl;
-        clusters[0].print_cluster();
-        for(int r=0;r<clusters.size();r++){
-            clusters[r].empty_clitems();
-        }
-        assign_to_clusters(data_set,clusters,num_lines);
-
-        for(int i=0;i<clusters.size();i++){
-            if (clusters[i].check_equal(temp[i]) == 1 )
-                cout << "Cluster did not change. Exit rep: "<< r << endl;
-                temp.clear();
-                return 1;
-        }*/
         temp.clear();
         cout << "rep: " << r <<endl;
     }
+    silhouette(clusters);
 
     return 0;
 }
