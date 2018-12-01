@@ -55,9 +55,6 @@ int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item){
     return best;
 }
 
-
-
-
 void silhouette(vector<cluster> clusters){
     int next_best_clust=0;
     double total=0.0,total_sils=0.0;
@@ -111,6 +108,35 @@ vector<double> calculate_mean_centroid(cluster cl) {
 
         for (int i = 0; i < 204; i++){
             new_cl[i]/=size;
+        }
+    }
+    return new_cl;
+}
+
+
+double obj_func(vector<data_point<double>> items,vector<double> point){
+    double dist=0.0;
+
+    for (int i=0; i < items.size();i++){
+        dist+=euclidean_dist(items[i].point,point);
+    }
+
+    return dist/items.size();
+}
+
+
+vector<double> calculate_pam_centroid(cluster cl) {
+    vector<data_point<double>> cluster_dat = cl.get_items();
+    int size = (int) cluster_dat.size();
+    vector<double> new_cl(204, 0.0);
+    double dist;
+    double dist_min=10000000.0;
+
+
+    for(int i=0 ; i<cluster_dat.size(); i++){
+        if((dist=obj_func(cl.get_items(),cluster_dat[i].point))<dist_min){
+            dist_min=dist;
+            new_cl=cluster_dat[i].point;
         }
     }
     return new_cl;
@@ -260,7 +286,7 @@ int main(int argc, char** argv) {
     vector<cluster> temp;
     int same=0;
     char rand_name[21];
-    for(int r=0;r<100;r++){
+    for(int r=0;r<10;r++){
 
         for (int i=0;i<clusters.size(); i++){
             temp.push_back(clusters[i]);
@@ -306,8 +332,3 @@ int main(int argc, char** argv) {
     silhouette(clusters);
     return 0;
 }
-
-
-
-
-
