@@ -33,13 +33,52 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
-void silhouette(vector<cluster> clusters){
-    double total=0.0;
-    for (int i=0; i < clusters.size() ; i ++){
-        total=silhouette_cluster(clusters[i]);
+double silhouette_cluster(cluster cl,data_point<double> item){
+    vector<data_point<double>> items = cl.get_items();
+    double sum=0.0;
+    for (int i=0 ; i < items.size(); i++ ){
+        sum+=euclidean_dist(item.point,items[i].point);
     }
+    return sum/items.size();
+}
 
-    total/=clusters.size();
+int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item){
+    int best=0;
+    double dist_min=100000.0,dist;
+    for (int i=0; i<clusters.size(); i++){
+        if(i==avoid) continue;
+        if ((dist=euclidean_dist(clusters[i].get_centroid().point,item.point))<dist_min){
+            dist_min=dist;
+            best=i;
+        }
+    }
+    return best;
+}
+
+
+
+
+void silhouette(vector<cluster> clusters){
+    int next_best_clust=0;
+    double total=0.0,total_sils=0.0;
+    double a = 0.0 , b = 0.0 ,max;
+    for (int i=0; i < clusters.size() ; i++){
+        vector<data_point<double>> items = clusters[i].get_items();
+        for (int j=0; j<items.size() ; j++){
+            a=silhouette_cluster(clusters[i],items[j]);
+            next_best_clust=find_nbcluster(clusters,j,items[j]);
+            b=silhouette_cluster(clusters[next_best_clust],items[j]);
+            if(a>b)
+                max=a;
+            else max=b;
+            total+=(b-a)/max;
+        }
+        cout <<"Silhouette of Cluster " << i << " is: " << total/items.size() << endl;
+        total_sils+=total/items.size();
+        total=0.0;
+        items.clear();
+    }
+    cout <<"Silhouette Total: " << total_sils/clusters.size() << endl;
 }
 
 void gen_random(char *s, const int len) {
@@ -221,14 +260,15 @@ int main(int argc, char** argv) {
     vector<cluster> temp;
     int same=0;
     char rand_name[21];
-    for(int r=0;r<100000;r++){
+    for(int r=0;r<100;r++){
 
         for (int i=0;i<clusters.size(); i++){
             temp.push_back(clusters[i]);
         }
 
         for (int i=0;i<clusters.size();i++){
-            vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
+            //vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
+            vector<double> new_centrer = calculate_pam_centroid(clusters[i]);
             cout << "size new center: " << new_centrer.size() << "rep"<< i<< endl;
             for (int z=0;z <204;z++)
                 cout << " " << new_centrer[z];
@@ -257,14 +297,13 @@ int main(int argc, char** argv) {
         if (same==clusters.size()){
             cout << "Cluster did not change. Exit rep: "<< r << endl;
             temp.clear();
-            return 1;
+            break;
         }
         same=0;
         temp.clear();
         cout << "rep: " << r <<endl;
     }
     silhouette(clusters);
-
     return 0;
 }
 
