@@ -19,5 +19,6 @@ void get_data_lengths(string input,int& lines, int& d) ;
 void feed_data_set(string input, data_point<double> *pPoint,int d) ;
 double euclidean_dist(vector<double> p1,vector<double> p2) ;
 int clusters_equal(cluster x, cluster y);
+double cosine_similarity(vector<double> p1,vector<double> p2);
 
 #endif //PROJECT2_UTILITIES_H

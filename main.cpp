@@ -17,14 +17,18 @@
 
 using namespace std;
 
-void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines){
+void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int num_lines,string metric){
     double dist_min,dist;
     int cluster;
     for (int i=0;i<num_lines;i++){
         dist_min=100000.0;
         cluster=0;
         for(int j=0;j<clusters.size();j++){
-            if ((dist=euclidean_dist(dat[i].point,clusters[j].get_centroid().point))<dist_min){
+            if (metric == "euclidean")
+                dist=euclidean_dist(dat[i].point,clusters[j].get_centroid().point);
+            else
+                dist=cosine_similarity(dat[i].point,clusters[j].get_centroid().point);
+            if (dist<dist_min){
                 dist_min=dist;
                 cluster=j;
             }
@@ -33,21 +37,28 @@ void assign_to_clusters(data_point<double> *dat,vector<cluster> &clusters,int nu
     }
 }
 
-double silhouette_cluster(cluster cl,data_point<double> item){
+double silhouette_cluster(cluster cl,data_point<double> item,string metric){
     vector<data_point<double>> items = cl.get_items();
     double sum=0.0;
     for (int i=0 ; i < items.size(); i++ ){
-        sum+=euclidean_dist(item.point,items[i].point);
+        if (metric == "euclidean")
+            sum+=euclidean_dist(item.point,items[i].point);
+        else
+            sum+=cosine_similarity(item.point,items[i].point);
     }
     return sum/items.size();
 }
 
-int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item){
+int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item,string metric){
     int best=0;
     double dist_min=100000.0,dist;
     for (int i=0; i<clusters.size(); i++){
         if(i==avoid) continue;
-        if ((dist=euclidean_dist(clusters[i].get_centroid().point,item.point))<dist_min){
+        if (metric == "euclidean")
+            dist==euclidean_dist(clusters[i].get_centroid().point,item.point);
+        else
+            dist=cosine_similarity(clusters[i].get_centroid().point,item.point);
+        if (dist<dist_min){
             dist_min=dist;
             best=i;
         }
@@ -55,16 +66,16 @@ int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item){
     return best;
 }
 
-void silhouette(vector<cluster> clusters){
+void silhouette(vector<cluster> clusters,string metric){
     int next_best_clust=0;
     double total=0.0,total_sils=0.0;
     double a = 0.0 , b = 0.0 ,max;
     for (int i=0; i < clusters.size() ; i++){
         vector<data_point<double>> items = clusters[i].get_items();
         for (int j=0; j<items.size() ; j++){
-            a=silhouette_cluster(clusters[i],items[j]);
-            next_best_clust=find_nbcluster(clusters,j,items[j]);
-            b=silhouette_cluster(clusters[next_best_clust],items[j]);
+            a=silhouette_cluster(clusters[i],items[j],metric);
+            next_best_clust=find_nbcluster(clusters,j,items[j],metric);
+            b=silhouette_cluster(clusters[next_best_clust],items[j],metric);
             if(a>b)
                 max=a;
             else max=b;
@@ -114,18 +125,21 @@ vector<double> calculate_mean_centroid(cluster cl) {
 }
 
 
-double obj_func(vector<data_point<double>> items,vector<double> point){
+double obj_func(vector<data_point<double>> items,vector<double> point,string metric){
     double dist=0.0;
 
     for (int i=0; i < items.size();i++){
-        dist+=euclidean_dist(items[i].point,point);
+        if (metric=="euclidean")
+            dist+=euclidean_dist(items[i].point,point);
+        else
+            dist+=cosine_similarity(items[i].point,point);
     }
 
     return dist/items.size();
 }
 
 
-vector<double> calculate_pam_centroid(cluster cl) {
+vector<double> calculate_pam_centroid(cluster cl,string metric) {
     vector<data_point<double>> cluster_dat = cl.get_items();
     int size = (int) cluster_dat.size();
     vector<double> new_cl(204, 0.0);
@@ -134,7 +148,7 @@ vector<double> calculate_pam_centroid(cluster cl) {
 
 
     for(int i=0 ; i<cluster_dat.size(); i++){
-        if((dist=obj_func(cl.get_items(),cluster_dat[i].point))<dist_min){
+        if((dist=obj_func(cl.get_items(),cluster_dat[i].point,metric))<dist_min){
             dist_min=dist;
             new_cl=cluster_dat[i].point;
         }
@@ -197,7 +211,7 @@ vector<cluster> create_random_centroids(data_point<double> *dat,int k,int length
 
 
 
-vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length){
+vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length,string metric){
     double dist_max,dist,dist_min;
     data_point<double> temp_cent,temp_cent2;
     vector<cluster> clusters1;
@@ -212,7 +226,11 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
         for(int i=0 ; i < length ;i++){
             dist_min=100000.0;
             for(int j=0;j<clusters1.size();j++){
-                if ((dist=euclidean_dist(dat[i].point,clusters1[j].get_centroid().point))<dist_min){
+                if(metric=="euclidean")
+                    dist=euclidean_dist(dat[i].point,clusters1[j].get_centroid().point);
+                else
+                    dist=cosine_similarity(dat[i].point,clusters1[j].get_centroid().point);
+                if (dist<dist_min){
                     dist_min=dist;
                     temp_cent=dat[i];
                 }
@@ -235,10 +253,13 @@ int main(int argc, char** argv) {
     int num_hfunc = 4;
     int num_htables = 5;
     int exit_rep = 10;
-    string input="", conf1="", output1="", metric1="";
+    string input="", conf1="", output1="", metric1="euclidean";
     int i=0;
+    int init=0;   //default init method   : Random
+    int assign=0; //default assign method : Lloyds
+    int update=0; //default update method : Kmeans
     /* Reading Arguments from command line */
-    while ((c = getopt(argc, argv, "i:c:o:d:")) != -1) {
+    while ((c = getopt(argc, argv, "i:c:o:d:I:A:U:")) != -1) {
         switch (c) {
             case 'i':
                 input = optarg;
@@ -248,6 +269,15 @@ int main(int argc, char** argv) {
                 break;
             case 'o':
                 output1 = optarg;
+                break;
+            case 'I':
+                init = atoi(optarg);
+                break;
+            case 'A':
+                assign = atoi(optarg);
+                break;
+            case 'U':
+                update = atoi(optarg);
                 break;
             case 'd':
                 metric1 = optarg;
@@ -270,51 +300,42 @@ int main(int argc, char** argv) {
                 abort();
         }
     }
-
     get_cfg(conf1,num_clusters,num_hfunc,num_htables);
     get_data_lengths(input,num_lines,dim);
-    cout << "dimension: " << dim <<endl;
-    cout << "lines: " << num_lines << endl;
-
     data_point<double> data_set[num_lines];
     feed_data_set(input,data_set,dim);
-
-    vector<cluster> clusters=create_kmeans_centroids(data_set,num_clusters,num_lines);
-
-    assign_to_clusters(data_set,clusters,num_lines);
-
+    vector<cluster> clusters;
+    if(init == 0)
+        clusters=create_random_centroids(data_set,num_clusters,num_lines);
+    else
+        clusters=create_kmeans_centroids(data_set,num_clusters,num_lines,metric1);
+    assign_to_clusters(data_set,clusters,num_lines,metric1);
     vector<cluster> temp;
     int same=0;
     char rand_name[21];
     for(int r=0;r<10;r++){
-
         for (int i=0;i<clusters.size(); i++){
             temp.push_back(clusters[i]);
         }
-
         for (int i=0;i<clusters.size();i++){
-            //vector<double> new_centrer = calculate_mean_centroid(clusters[i]);
-            vector<double> new_centrer = calculate_pam_centroid(clusters[i]);
-            cout << "size new center: " << new_centrer.size() << "rep"<< i<< endl;
-            for (int z=0;z <204;z++)
-                cout << " " << new_centrer[z];
-            cout <<endl <<endl;
+            vector<double> new_centrer;
+            if( update == 0 )
+                new_centrer = calculate_mean_centroid(clusters[i]);
+            else
+                 new_centrer = calculate_pam_centroid(clusters[i],metric1);
             data_point<double> temp1;
-            gen_random(rand_name,20);
-            temp1.name="Mean";
+            gen_random(rand_name,5);
+            temp1.name="Mean_";
             temp1.name.append(rand_name);
             temp1.point=new_centrer;
             clusters[i].set_centroid(temp1);
             new_centrer.clear();
             temp1.point.clear();
         }
-
         for(int r=0;r<clusters.size();r++){
             clusters[r].empty_clitems();
         }
-
-        assign_to_clusters(data_set,clusters,num_lines);
-
+        assign_to_clusters(data_set,clusters,num_lines,metric1);
         for(int i=0;i<clusters.size();i++){
             if (clusters[i].check_equal(temp[i]) == 1 ){
                 same++;
@@ -327,8 +348,8 @@ int main(int argc, char** argv) {
         }
         same=0;
         temp.clear();
-        cout << "rep: " << r <<endl;
+        cout << "iterration: " << r <<endl;
     }
-    silhouette(clusters);
+    silhouette(clusters,metric1);
     return 0;
 }

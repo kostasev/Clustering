@@ -53,6 +53,18 @@ double euclidean_dist(vector<double> p1,vector<double> p2) {
     return sum;
 }
 
+double cosine_similarity(vector<double> p1,vector<double> p2)
+{
+    double dot = 0.0, denom_a = 0.0, denom_b = 0.0 ;
+    for(unsigned int i = 0u; i < p1.size(); i++) {
+        dot += p1[i] * p2[i] ;
+        denom_a += p1[i] * p1[i] ;
+        denom_b += p2[i] * p2[i] ;
+    }
+    return dot / (sqrt(denom_a) * sqrt(denom_b)) ;
+}
+
+
 int clusters_equal(cluster x, cluster y){
     //if(x.get_items().size()!=y.get_items().size()) return 1;
     return x.check_equal(y);
