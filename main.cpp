@@ -72,17 +72,17 @@ int query_htables(vector<Hash_table> &tables,vector<cluster> clusters,data_point
 
 int main(int argc, char** argv) {
     int c,num_lines=0,dim=0,table_size,num_lines2;
-    int num_clusters = 5;
+    int num_clusters = 5,num_cl;
     int num_hfunc = 4;
     int num_htables = 5;
-    int exit_rep = 10;
+    int exit_rep = 25;
     string input="", conf1="", output1="", metric1="euclidean";
     int i=0;
     int init=0;   //default init method   : Random
     int assign=0; //default assign method : Lloyds
     int update=0; //default update method : Kmeans
     /* Reading Arguments from command line */
-    while ((c = getopt(argc, argv, "i:c:o:d:I:A:U:")) != -1) {
+    while ((c = getopt(argc, argv, "i:c:o:d:I:A:U:k:")) != -1) {
         switch (c) {
             case 'i':
                 input = optarg;
@@ -101,6 +101,9 @@ int main(int argc, char** argv) {
                 break;
             case 'U':
                 update = atoi(optarg);
+                break;
+            case 'k':
+                num_cl = atoi(optarg);
                 break;
             case 'd':
                 metric1 = optarg;
@@ -124,6 +127,7 @@ int main(int argc, char** argv) {
         }
     }
     get_cfg(conf1,num_clusters,num_hfunc,num_htables);
+    num_clusters=num_cl;
     get_data_lengths(input,num_lines,dim);
     data_point<double> data_set[num_lines],data_set2[num_lines];
     feed_data_set(input,data_set,dim,num_lines);
@@ -149,7 +153,7 @@ int main(int argc, char** argv) {
     vector<cluster> temp;
     int same=0;
     char rand_name[21];
-    for(int rr=0;rr<10;rr++){
+    for(int rr=0;rr<exit_rep;rr++){
         for (int i=0;i<clusters.size(); i++){
             temp.push_back(clusters[i]);
         }
@@ -194,7 +198,7 @@ int main(int argc, char** argv) {
     auto end = chrono::steady_clock::now();
     chrono::duration<double> diff = end-start;
     cout << "Agorithm: " << "I: "<< init << " A: " << assign << " U: " << update << endl;
-    cout << "Metric: " << metric1;
+    cout << "Metric: " << metric1 <<endl;
     for (int i=0; i <clusters.size();i++){
         cout << "Cluster-" << i <<endl;
         clusters[i].print_cluster();
