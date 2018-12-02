@@ -15,6 +15,15 @@ int num_columns(string line) {
     return words;
 }
 
+bool vectors_eq(std::vector<double> v1, std::vector<double> v2){
+    for (int i = 0 ; i<v1.size() ; i++){
+        if(v1[i]!=v2[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
 
 void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) {
     ifstream file;
@@ -84,7 +93,7 @@ void get_data_lengths(string input,int& lines, int& d) {
     }
     inputfd.close();
 }
-void feed_data_set(string input, data_point<double> *pPoint,int d) {
+void feed_data_set(string input, data_point<double> *pPoint,int d,int num_lines) {
     char cc[1024] ;
     double dd;
     string name;
@@ -94,7 +103,7 @@ void feed_data_set(string input, data_point<double> *pPoint,int d) {
     inputfd.exceptions(std::ifstream::failbit|std::ifstream::badbit);
     int i=0,j,z=0;
     cout.precision(15);
-    while(z<5000){
+    while(z<num_lines){
         for( int ii=0; ii< d-1 ;ii++){
             getline(inputfd,line,',');
             dd=stod(line);
@@ -146,6 +155,8 @@ int find_nbcluster(vector<cluster> clusters,int avoid,data_point<double> item,st
     double dist_min=100000.0,dist;
     for (int i=0; i<clusters.size(); i++){
         if(i==avoid) continue;
+        //if (clusters[i].get_items().size()==0) continue;
+        //if (item.point.size()==0) return 0;
         if (metric == "euclidean")
             dist==euclidean_dist(clusters[i].get_centroid().point,item.point);
         else
@@ -164,6 +175,7 @@ void silhouette(vector<cluster> clusters,string metric){
     double a = 0.0 , b = 0.0 ,max;
     for (int i=0; i < clusters.size() ; i++){
         vector<data_point<double>> items = clusters[i].get_items();
+        if (items.size()==0) continue;
         for (int j=0; j<items.size() ; j++){
             a=silhouette_cluster(clusters[i],items[j],metric);
             next_best_clust=find_nbcluster(clusters,j,items[j],metric);
@@ -238,11 +250,11 @@ vector<double> calculate_pam_centroid(cluster cl,string metric) {
     double dist;
     double dist_min=10000000.0;
 
-
     for(int i=0 ; i<cluster_dat.size(); i++){
         if((dist=obj_func(cl.get_items(),cluster_dat[i].point,metric))<dist_min){
             dist_min=dist;
             new_cl=cluster_dat[i].point;
+            if (dist_min<250) break;
         }
     }
     return new_cl;

@@ -18,10 +18,11 @@
 
 using namespace std;
 
-int num_columns(std::string line) ;
+int num_columns(std::string line);
+bool vectors_eq(std::vector<double> v1, std::vector<double> v2);
 void get_cfg(string inputf, int &clusters, int &hfunc, int &htables) ;
 void get_data_lengths(string input,int& lines, int& d) ;
-void feed_data_set(string input, data_point<double> *pPoint,int d) ;
+void feed_data_set(string input, data_point<double> *pPoint,int d,int num) ;
 double euclidean_dist(vector<double> p1,vector<double> p2) ;
 int clusters_equal(cluster x, cluster y);
 double cosine_similarity(vector<double> p1,vector<double> p2);
