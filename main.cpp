@@ -130,6 +130,7 @@ int main(int argc, char** argv) {
     vector<cluster> clusters;
     vector<int> r;
     vector <Hash_table> tables ;
+    auto start = chrono::steady_clock::now();
     /*Initialization*/
     if(init == 0)   //Random
         clusters=create_random_centroids(data_set,num_clusters,num_lines);
@@ -190,6 +191,16 @@ int main(int argc, char** argv) {
         temp.clear();
         cout << "iterration: " << rr <<endl;
     }
+    auto end = chrono::steady_clock::now();
+    chrono::duration<double> diff = end-start;
+    cout << "Agorithm: " << "I: "<< init << " A: " << assign << " U: " << update << endl;
+    cout << "Metric: " << metric1;
+    for (int i=0; i <clusters.size();i++){
+        cout << "Cluster-" << i <<endl;
+        clusters[i].print_cluster();
+    }
     silhouette(clusters,metric1);
+    cout << "Execution time: " << diff.count() << " seconds"<< endl;
+    clusters.clear();
     return 0;
 }
