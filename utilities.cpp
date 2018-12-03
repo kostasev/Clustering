@@ -325,6 +325,8 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
     cluster temp1=cluster(dat[uint_dist(generator)]);
     clusters1.push_back(temp1);
     temp_cent = temp1.get_centroid();
+    int rand=0,rand1 = uint_dist(generator)%11;
+
     while (--k>0){
         dist_max=0.0;
         for(int i=0 ; i < length ;i++){
@@ -340,10 +342,14 @@ vector<cluster> create_kmeans_centroids(data_point<double> *dat,int k,int length
                 }
             }
             if (dist_min>dist_max){
+
                 dist_max=dist_min;
                 temp_cent2=temp_cent;
+                rand++;
+                if (rand==rand1) break;
             }
         }
+        rand=0;
         clusters1.emplace_back(temp_cent2);
     }
     return clusters1;
