@@ -1,0 +1,133 @@
+iterration: 0
+iterration: 1
+iterration: 2
+Cluster did not change. Exit rep: 3
+Agorithm: I: 1 A: 1 U: 1
+Metric: euclidean
+Cluster-0
+Centroid: Mean_iEvq8
+Cluster Size: 1
+item_4966 
+Cluster-1
+Centroid: Mean_vmf7T
+Cluster Size: 1
+item_1 
+Cluster-2
+Centroid: Mean_ZAPjU
+Cluster Size: 1
+item_2363 
+Cluster-3
+Centroid: Mean_AZ6Cu
+Cluster Size: 1
+item_3724 
+Cluster-4
+Centroid: Mean_86nAy
+Cluster Size: 1
+item_1242 
+Cluster-5
+Centroid: Mean_YDamC
+Cluster Size: 1
+item_4345 
+Cluster-6
+Centroid: Mean_CSQ7G
+Cluster Size: 1
+item_3103 
+Cluster-7
+Centroid: Mean_X33A8
+Cluster Size: 1
+item_1863 
+Cluster-8
+Centroid: Mean_WhGwR
+Cluster Size: 2
+item_621 item_636 
+Cluster-9
+Centroid: Mean_k40pH
+Cluster Size: 1
+item_1553 
+Cluster-10
+Centroid: Mean_uxNf5
+Cluster Size: 1
+item_3413 
+Cluster-11
+Centroid: Mean_JEIty
+Cluster Size: 3
+item_2565 item_2638 item_2793 
+Cluster-12
+Centroid: Mean_S3QrB
+Cluster Size: 2
+item_4034 item_4115 
+Cluster-13
+Centroid: Mean_gOChW
+Cluster Size: 1
+item_2173 
+Cluster-14
+Centroid: Mean_KCDa6
+Cluster Size: 1
+item_311 
+Cluster-15
+Centroid: Mean_eIAd7
+Cluster Size: 1
+item_4655 
+Cluster-16
+Centroid: Mean_RV4mB
+Cluster Size: 1
+item_931 
+Cluster-17
+Centroid: Mean_A5NQx
+Cluster Size: 1
+item_1708 
+Cluster-18
+Centroid: Mean_Jt0jk
+Cluster Size: 1
+item_3569 
+Cluster-19
+Centroid: Mean_9N6L5
+Cluster Size: 1
+item_3879 
+Cluster-20
+Centroid: Mean_cdFnD
+Cluster Size: 1
+item_4500 
+Cluster-21
+Centroid: Mean_LSWV3
+Cluster Size: 1
+item_2483 
+Cluster-22
+Centroid: Mean_bvYgh
+Cluster Size: 1
+item_1398 
+Cluster-23
+Centroid: Mean_hol4E
+Cluster Size: 1
+item_776 
+Cluster-24
+Centroid: Mean_gN5e4
+Cluster Size: 1
+item_4810 
+Silhouette of Cluster 0 is: 1
+Silhouette of Cluster 1 is: -nan
+Silhouette of Cluster 2 is: 1
+Silhouette of Cluster 3 is: 1
+Silhouette of Cluster 4 is: 1
+Silhouette of Cluster 5 is: 1
+Silhouette of Cluster 6 is: 1
+Silhouette of Cluster 7 is: 1
+Silhouette of Cluster 8 is: 0.993065532509734
+Silhouette of Cluster 9 is: 1
+Silhouette of Cluster 10 is: 1
+Silhouette of Cluster 11 is: 0.956489576198247
+Silhouette of Cluster 12 is: 0.971179731024452
+Silhouette of Cluster 13 is: 1
+Silhouette of Cluster 14 is: 1
+Silhouette of Cluster 15 is: 1
+Silhouette of Cluster 16 is: 1
+Silhouette of Cluster 17 is: 1
+Silhouette of Cluster 18 is: 1
+Silhouette of Cluster 19 is: 1
+Silhouette of Cluster 20 is: 1
+Silhouette of Cluster 21 is: 1
+Silhouette of Cluster 22 is: 1
+Silhouette of Cluster 23 is: 1
+Silhouette of Cluster 24 is: 1
+Silhouette Total: -nan
+Execution time: 5.396021051 seconds

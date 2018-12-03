@@ -1,0 +1,510 @@
+iterration: 0
+iterration: 1
+iterration: 2
+iterration: 3
+iterration: 4
+Cluster did not change. Exit rep: 5
+Agorithm: I: 1 A: 1 U: 1
+Metric: euclidean
+Cluster-0
+Centroid: Mean_gMT3r
+Cluster Size: 1
+item_2186 
+Cluster-1
+Centroid: Mean_aKZbO
+Cluster Size: 2
+item_4981 item_5000 
+Cluster-2
+Centroid: Mean_eidPh
+Cluster Size: 1
+item_1 
+Cluster-3
+Centroid: Mean_g4oAv
+Cluster Size: 1
+item_3593 
+Cluster-4
+Centroid: Mean_28t47
+Cluster Size: 1
+item_1093 
+Cluster-5
+Centroid: Mean_GQ2mQ
+Cluster Size: 2
+item_4297 item_4302 
+Cluster-6
+Centroid: Mean_QQmtU
+Cluster Size: 2
+item_2888 item_2890 
+Cluster-7
+Centroid: Mean_bRmA2
+Cluster Size: 1
+item_1640 
+Cluster-8
+Centroid: Mean_AmllB
+Cluster Size: 1
+item_547 
+Cluster-9
+Centroid: Mean_QQEEY
+Cluster Size: 3
+item_3938 item_3941 item_3945 
+Cluster-10
+Centroid: Mean_7EgzG
+Cluster Size: 2
+item_2494 item_2538 
+Cluster-11
+Centroid: Mean_lFglz
+Cluster Size: 3
+item_4648 item_4660 item_4661 
+Cluster-12
+Centroid: Mean_6BOq2
+Cluster Size: 1
+item_3241 
+Cluster-13
+Centroid: Mean_sRUeZ
+Cluster Size: 1
+item_1366 
+Cluster-14
+Centroid: Mean_WmMFX
+Cluster Size: 1
+item_820 
+Cluster-15
+Centroid: Mean_Vdxjp
+Cluster Size: 1
+item_1913 
+Cluster-16
+Centroid: Mean_Tr19o
+Cluster Size: 1
+item_274 
+Cluster-17
+Centroid: Mean_Hs1ye
+Cluster Size: 1
+item_4824 
+Cluster-18
+Centroid: Mean_04nMv
+Cluster Size: 4
+item_3414 item_3416 item_3417 item_3432 
+Cluster-19
+Centroid: Mean_qEKKq
+Cluster Size: 2
+item_4121 item_4125 
+Cluster-20
+Centroid: Mean_uoaE2
+Cluster Size: 1
+item_2362 
+Cluster-21
+Centroid: Mean_8jf3R
+Cluster Size: 1
+item_3769 
+Cluster-22
+Centroid: Mean_VXGUe
+Cluster Size: 1
+item_2714 
+Cluster-23
+Centroid: Mean_4mV5k
+Cluster Size: 1
+item_4472 
+Cluster-24
+Centroid: Mean_73muQ
+Cluster Size: 1
+item_3065 
+Cluster-25
+Centroid: Mean_hkc02
+Cluster Size: 1
+item_1503 
+Cluster-26
+Centroid: Mean_Rur18
+Cluster Size: 1
+item_2050 
+Cluster-27
+Centroid: Mean_t7pW9
+Cluster Size: 1
+item_137 
+Cluster-28
+Centroid: Mean_EzeUU
+Cluster Size: 1
+item_1229 
+Cluster-29
+Centroid: Mean_GYGlb
+Cluster Size: 1
+item_683 
+Cluster-30
+Centroid: Mean_yqfkl
+Cluster Size: 1
+item_957 
+Cluster-31
+Centroid: Mean_3STfS
+Cluster Size: 1
+item_410 
+Cluster-32
+Centroid: Mean_W4KL6
+Cluster Size: 1
+item_1776 
+Cluster-33
+Centroid: Mean_QEBDi
+Cluster Size: 1
+item_4912 
+Cluster-34
+Centroid: Mean_KSiyw
+Cluster Size: 1
+item_4560 
+Cluster-35
+Centroid: Mean_AFTQy
+Cluster Size: 2
+item_4736 item_4741 
+Cluster-36
+Centroid: Mean_2Oph8
+Cluster Size: 1
+item_4209 
+Cluster-37
+Centroid: Mean_YiY1M
+Cluster Size: 1
+item_2274 
+Cluster-38
+Centroid: Mean_yXQGq
+Cluster Size: 2
+item_2400 item_2406 
+Cluster-39
+Centroid: Mean_Ug4gs
+Cluster Size: 1
+item_2802 
+Cluster-40
+Centroid: Mean_l0KRx
+Cluster Size: 4
+item_3503 item_3505 item_3515 item_3520 
+Cluster-41
+Centroid: Mean_GbAhz
+Cluster Size: 2
+item_3329 item_3334 
+Cluster-42
+Centroid: Mean_8kNxP
+Cluster Size: 2
+item_3857 item_3868 
+Cluster-43
+Centroid: Mean_TT80V
+Cluster Size: 2
+item_3146 item_3153 
+Cluster-44
+Centroid: Mean_Uw0uB
+Cluster Size: 1
+item_2626 
+Cluster-45
+Centroid: Mean_rPpt3
+Cluster Size: 1
+item_4033 
+Cluster-46
+Centroid: Mean_he315
+Cluster Size: 2
+item_3681 item_3688 
+Cluster-47
+Centroid: Mean_yGe8x
+Cluster Size: 1
+item_4384 
+Cluster-48
+Centroid: Mean_dHhyC
+Cluster Size: 2
+item_2974 item_2978 
+Cluster-49
+Centroid: Mean_5SgDQ
+Cluster Size: 1
+item_1982 
+Cluster-50
+Centroid: Mean_9hK9Z
+Cluster Size: 1
+item_478 
+Cluster-51
+Centroid: Mean_V0wLs
+Cluster Size: 1
+item_69 
+Cluster-52
+Centroid: Mean_z2U14
+Cluster Size: 1
+item_889 
+Cluster-53
+Centroid: Mean_azIE8
+Cluster Size: 1
+item_1844 
+Cluster-54
+Centroid: Mean_FqNvo
+Cluster Size: 1
+item_1572 
+Cluster-55
+Centroid: Mean_X0EBD
+Cluster Size: 1
+item_1708 
+Cluster-56
+Centroid: Mean_eKszS
+Cluster Size: 1
+item_205 
+Cluster-57
+Centroid: Mean_PSQMn
+Cluster Size: 1
+item_751 
+Cluster-58
+Centroid: Mean_ILonK
+Cluster Size: 1
+item_1297 
+Cluster-59
+Centroid: Mean_sLKAX
+Cluster Size: 1
+item_1435 
+Cluster-60
+Centroid: Mean_QNNlI
+Cluster Size: 1
+item_1025 
+Cluster-61
+Centroid: Mean_CGGQS
+Cluster Size: 1
+item_1161 
+Cluster-62
+Centroid: Mean_R3kJ0
+Cluster Size: 1
+item_342 
+Cluster-63
+Centroid: Mean_ChSd3
+Cluster Size: 1
+item_615 
+Cluster-64
+Centroid: Mean_GvM2g
+Cluster Size: 1
+item_2118 
+Cluster-65
+Centroid: Mean_hs1z0
+Cluster Size: 1
+item_4428 
+Cluster-66
+Centroid: Mean_ZNNu6
+Cluster Size: 1
+item_4956 
+Cluster-67
+Centroid: Mean_e6MuV
+Cluster Size: 1
+item_2934 
+Cluster-68
+Centroid: Mean_oKYZb
+Cluster Size: 1
+item_4516 
+Cluster-69
+Centroid: Mean_YjI0M
+Cluster Size: 1
+item_3901 
+Cluster-70
+Centroid: Mean_LEGiG
+Cluster Size: 1
+item_4692 
+Cluster-71
+Centroid: Mean_wN8wK
+Cluster Size: 2
+item_4253 item_4257 
+Cluster-72
+Centroid: Mean_8ThUN
+Cluster Size: 1
+item_4780 
+Cluster-73
+Centroid: Mean_l8U70
+Cluster Size: 1
+item_3461 
+Cluster-74
+Centroid: Mean_zuKXR
+Cluster Size: 1
+item_2582 
+Cluster-75
+Centroid: Mean_w3AE3
+Cluster Size: 2
+item_3989 item_4003 
+Cluster-76
+Centroid: Mean_XYGlE
+Cluster Size: 1
+item_3549 
+Cluster-77
+Centroid: Mean_Whbdb
+Cluster Size: 2
+item_2670 item_2682 
+Cluster-78
+Centroid: Mean_vj4aD
+Cluster Size: 1
+item_3197 
+Cluster-79
+Centroid: Mean_SLLuQ
+Cluster Size: 1
+item_4165 
+Cluster-80
+Centroid: Mean_KrKeO
+Cluster Size: 2
+item_3285 item_3304 
+Cluster-81
+Centroid: Mean_lYPun
+Cluster Size: 2
+item_4868 item_4889 
+Cluster-82
+Centroid: Mean_SRLgA
+Cluster Size: 3
+item_3813 item_3815 item_3826 
+Cluster-83
+Centroid: Mean_ZBp8o
+Cluster Size: 1
+item_2230 
+Cluster-84
+Centroid: Mean_R1XVZ
+Cluster Size: 2
+item_2428 item_2450 
+Cluster-85
+Centroid: Mean_lvs4p
+Cluster Size: 1
+item_4077 
+Cluster-86
+Centroid: Mean_IOgd1
+Cluster Size: 1
+item_2318 
+Cluster-87
+Centroid: Mean_2MZRG
+Cluster Size: 2
+item_2843 item_2846 
+Cluster-88
+Centroid: Mean_MsffY
+Cluster Size: 1
+item_3109 
+Cluster-89
+Centroid: Mean_pChdI
+Cluster Size: 2
+item_4602 item_4604 
+Cluster-90
+Centroid: Mean_V4H1Z
+Cluster Size: 1
+item_2384 
+Cluster-91
+Centroid: Mean_qkTio
+Cluster Size: 3
+item_3725 item_3728 item_3737 
+Cluster-92
+Centroid: Mean_IzBza
+Cluster Size: 1
+item_2758 
+Cluster-93
+Centroid: Mean_C1wjR
+Cluster Size: 2
+item_3373 item_3376 
+Cluster-94
+Centroid: Mean_B4Joj
+Cluster Size: 3
+item_3622 item_3635 item_3637 
+Cluster-95
+Centroid: Mean_pcuXF
+Cluster Size: 1
+item_4341 
+Cluster-96
+Centroid: Mean_C0JS1
+Cluster Size: 1
+item_3022 
+Cluster-97
+Centroid: Mean_qIjJz
+Cluster Size: 1
+item_1538 
+Cluster-98
+Centroid: Mean_WcyhZ
+Cluster Size: 1
+item_512 
+Cluster-99
+Centroid: Mean_YrYSa
+Cluster Size: 1
+item_2016 
+Silhouette of Cluster 0 is: 1
+Silhouette of Cluster 1 is: 0.49831201157995
+Silhouette of Cluster 2 is: 1
+Silhouette of Cluster 3 is: 1
+Silhouette of Cluster 4 is: 1
+Silhouette of Cluster 5 is: 0.997524423550953
+Silhouette of Cluster 6 is: 0.998859035732926
+Silhouette of Cluster 7 is: 1
+Silhouette of Cluster 8 is: 1
+Silhouette of Cluster 9 is: 0.99775983953547
+Silhouette of Cluster 10 is: 0.964332080546762
+Silhouette of Cluster 11 is: 0.990569171718839
+Silhouette of Cluster 12 is: 1
+Silhouette of Cluster 13 is: 1
+Silhouette of Cluster 14 is: 1
+Silhouette of Cluster 15 is: 1
+Silhouette of Cluster 16 is: 1
+Silhouette of Cluster 17 is: 1
+Silhouette of Cluster 18 is: 0.994658112013794
+Silhouette of Cluster 19 is: 0.998265223853781
+Silhouette of Cluster 20 is: 1
+Silhouette of Cluster 21 is: 1
+Silhouette of Cluster 22 is: 1
+Silhouette of Cluster 23 is: 1
+Silhouette of Cluster 24 is: 1
+Silhouette of Cluster 25 is: 1
+Silhouette of Cluster 26 is: 1
+Silhouette of Cluster 27 is: 1
+Silhouette of Cluster 28 is: 1
+Silhouette of Cluster 29 is: 1
+Silhouette of Cluster 30 is: 1
+Silhouette of Cluster 31 is: 1
+Silhouette of Cluster 32 is: 1
+Silhouette of Cluster 33 is: 1
+Silhouette of Cluster 34 is: 1
+Silhouette of Cluster 35 is: 0.994433184882332
+Silhouette of Cluster 36 is: 1
+Silhouette of Cluster 37 is: 1
+Silhouette of Cluster 38 is: 0.992496601777675
+Silhouette of Cluster 39 is: 1
+Silhouette of Cluster 40 is: 0.994380782771813
+Silhouette of Cluster 41 is: 0.998131616449673
+Silhouette of Cluster 42 is: 0.995926615764781
+Silhouette of Cluster 43 is: 0.997197717784087
+Silhouette of Cluster 44 is: 1
+Silhouette of Cluster 45 is: 1
+Silhouette of Cluster 46 is: 0.997498499509847
+Silhouette of Cluster 47 is: 1
+Silhouette of Cluster 48 is: 0.998144421136999
+Silhouette of Cluster 49 is: 1
+Silhouette of Cluster 50 is: 1
+Silhouette of Cluster 51 is: 1
+Silhouette of Cluster 52 is: 1
+Silhouette of Cluster 53 is: 1
+Silhouette of Cluster 54 is: 1
+Silhouette of Cluster 55 is: 1
+Silhouette of Cluster 56 is: 1
+Silhouette of Cluster 57 is: 1
+Silhouette of Cluster 58 is: 1
+Silhouette of Cluster 59 is: 1
+Silhouette of Cluster 60 is: 1
+Silhouette of Cluster 61 is: 1
+Silhouette of Cluster 62 is: 1
+Silhouette of Cluster 63 is: 1
+Silhouette of Cluster 64 is: 1
+Silhouette of Cluster 65 is: 1
+Silhouette of Cluster 66 is: 1
+Silhouette of Cluster 67 is: 1
+Silhouette of Cluster 68 is: 1
+Silhouette of Cluster 69 is: 1
+Silhouette of Cluster 70 is: 1
+Silhouette of Cluster 71 is: 0.998056935002038
+Silhouette of Cluster 72 is: 1
+Silhouette of Cluster 73 is: 1
+Silhouette of Cluster 74 is: 1
+Silhouette of Cluster 75 is: 0.994555424452765
+Silhouette of Cluster 76 is: 1
+Silhouette of Cluster 77 is: 0.992611594642156
+Silhouette of Cluster 78 is: 1
+Silhouette of Cluster 79 is: 1
+Silhouette of Cluster 80 is: 0.992949451307558
+Silhouette of Cluster 81 is: 0.955134548708643
+Silhouette of Cluster 82 is: 0.99599469830087
+Silhouette of Cluster 83 is: 1
+Silhouette of Cluster 84 is: 0.976976027030677
+Silhouette of Cluster 85 is: 1
+Silhouette of Cluster 86 is: 1
+Silhouette of Cluster 87 is: 0.998387083593228
+Silhouette of Cluster 88 is: 1
+Silhouette of Cluster 89 is: 0.99827382199658
+Silhouette of Cluster 90 is: 1
+Silhouette of Cluster 91 is: 0.996253115366591
+Silhouette of Cluster 92 is: 1
+Silhouette of Cluster 93 is: 0.998845097708137
+Silhouette of Cluster 94 is: 0.99525914836708
+Silhouette of Cluster 95 is: 1
+Silhouette of Cluster 96 is: 1
+Silhouette of Cluster 97 is: 1
+Silhouette of Cluster 98 is: 1
+Silhouette of Cluster 99 is: 1
+Silhouette Total: 0.99301786285086
+Execution time: 70.652251491 seconds

@@ -1,0 +1,46 @@
+Cluster did not change. Exit rep: 0
+Agorithm: I: 0 A: 1 U: 0
+Metric: euclidean
+Cluster-0
+Centroid: Mean_fa37J
+Cluster Size: 0
+
+Cluster-1
+Centroid: Mean_ncCHr
+Cluster Size: 0
+
+Cluster-2
+Centroid: Mean_yDsbz
+Cluster Size: 0
+
+Cluster-3
+Centroid: Mean_ayy4c
+Cluster Size: 0
+
+Cluster-4
+Centroid: Mean_BWDxS
+Cluster Size: 1
+item_1972 
+Cluster-5
+Centroid: Mean_22Jjz
+Cluster Size: 0
+
+Cluster-6
+Centroid: Mean_hMaiR
+Cluster Size: 0
+
+Cluster-7
+Centroid: Mean_rV41m
+Cluster Size: 0
+
+Cluster-8
+Centroid: Mean_tzxlY
+Cluster Size: 0
+
+Cluster-9
+Centroid: Mean_vKWrO
+Cluster Size: 0
+
+Silhouette of Cluster 4 is: -nan
+Silhouette Total: -nan
+Execution time: 1.037687558 seconds

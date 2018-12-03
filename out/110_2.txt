@@ -1,0 +1,15 @@
+Cluster did not change. Exit rep: 0
+Agorithm: I: 1 A: 1 U: 0
+Metric: euclidean
+Cluster-0
+Centroid: Mean_fa37J
+Cluster Size: 1
+item_1885 
+Cluster-1
+Centroid: Mean_ncCHr
+Cluster Size: 1
+item_5000 
+Silhouette of Cluster 0 is: 1
+Silhouette of Cluster 1 is: -nan
+Silhouette Total: -nan
+Execution time: 1.071321782 seconds
